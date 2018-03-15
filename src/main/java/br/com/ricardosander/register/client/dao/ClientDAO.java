@@ -1,4 +1,9 @@
-package br.com.ricardosander.register.client;
+package br.com.ricardosander.register.client.dao;
 
-public class ClientDAO {
+import br.com.ricardosander.register.client.model.Client;
+
+public interface ClientDAO {
+
+    public boolean insert(Client client);
+
 }
