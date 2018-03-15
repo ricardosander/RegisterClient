@@ -1,4 +1,4 @@
-package br.com.ricardosander.register.client;
+package br.com.ricardosander.register.client.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
