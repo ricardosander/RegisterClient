@@ -4,6 +4,7 @@ import br.com.ricardosander.register.client.model.Client;
 
 public interface ClientDAO {
 
-    public boolean insert(Client client);
+    boolean insert(Client client);
 
+    Client find(Integer id);
 }

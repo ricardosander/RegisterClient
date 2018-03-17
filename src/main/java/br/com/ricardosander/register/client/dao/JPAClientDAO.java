@@ -22,4 +22,9 @@ public class JPAClientDAO implements ClientDAO {
         return true;
     }
 
+    @Override
+    public Client find(Integer id) {
+        return entityManager.find(Client.class, id);
+    }
+
 }

@@ -1,9 +1,7 @@
 package br.com.ricardosander.register.client.dao;
 
 import br.com.ricardosander.register.client.model.Client;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,15 +11,19 @@ import static org.junit.Assert.*;
 
 public class JPAClientDAOTest {
 
-    EntityManagerFactory emf;
+    private final static Integer ID = 1;
+    private final static String CPF = "123.456.789.01";
+    private final static String NAME = "Ricardo Sander";
 
-    @Before
-    public void setUp() {
+    private static EntityManagerFactory emf;
+
+    @BeforeClass
+    public static void setUp() {
         emf = Persistence.createEntityManagerFactory("client-test");
     }
 
-    @After
-    public void shutdown() {
+    @AfterClass
+    public static  void shutdown() {
         emf.close();
     }
 
@@ -30,17 +32,33 @@ public class JPAClientDAOTest {
 
         EntityManager entityManager = emf.createEntityManager();
 
-        JPAClientDAO jpaClientDAO = new JPAClientDAO(entityManager);
+        ClientDAO clientDAO = new JPAClientDAO(entityManager);
 
         Client client = new Client();
-        client.setCpf("123.456.79.00");
-        client.setNome("Ricardo Sander");
+        client.setCpf(CPF);
+        client.setNome(NAME);
 
-        boolean result = jpaClientDAO.insert(client);
+        boolean result = clientDAO.insert(client);
 
         entityManager.close();
 
         assertTrue(result);
         assertNotNull(client.getId());
+        assertEquals(ID, client.getId());
     }
+
+    @Test
+    public void find() {
+
+        EntityManager entityManager = emf.createEntityManager();
+
+        ClientDAO clientDAO = new JPAClientDAO(entityManager);
+        Client client = clientDAO.find(ID);
+
+        assertNotNull(client);
+        assertEquals(ID, client.getId());
+        assertEquals(NAME, client.getNome());
+        assertEquals(CPF, client.getCpf());
+    }
+
 }
