@@ -17,7 +17,7 @@ public class JPAClientDAOTest {
 
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("client");
+        emf = Persistence.createEntityManagerFactory("client-test");
     }
 
     @After
