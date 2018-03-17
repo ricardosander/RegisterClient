@@ -65,7 +65,7 @@ public class JPAClientDAOTest {
     }
 
     @Test
-    public void testTransientState() {
+    public void testManagedState() {
 
         EntityManager entityManager = emf.createEntityManager();
 
